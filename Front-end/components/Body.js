@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import List from "./list";
 import Add from "./Add";
-import Error from "./Error";
+import Pok from "./Pok";
+import Navbar from "./Navbar";
 
 const Body = () => {
   const [list, setlist] = useState([]);
@@ -29,7 +30,14 @@ const Body = () => {
   useEffect(() => {
     async function fetchdata() {
       try {
-        const getpost = await fetch("http://localhost:3000/Incoming");
+        const token = localStorage.getItem("token");
+        const getpost = await fetch("http://localhost:3000/Incoming", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = await getpost.json();
         setlist(data);
         console.log(data);
@@ -42,6 +50,7 @@ const Body = () => {
 
   return (
     <div className="Body">
+      <Navbar />
       <div className="but">
         <button className="Add" onClick={handleClick}>
           + Add Employee
@@ -65,7 +74,7 @@ const Body = () => {
       </div>
       {value && <Add item={() => setvalue(false)} />}
 
-      {error && <Error message={() => seterror(false)} />}
+      {error && <Pok onClose={() => seterror(false)} />}
     </div>
   );
 };

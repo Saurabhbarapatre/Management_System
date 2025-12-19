@@ -734,18 +734,20 @@ var _pok = require("./components/Pok");
 var _pokDefault = parcelHelpers.interopDefault(_pok);
 var _dashboard = require("./components/Dashboard");
 var _dashboardDefault = parcelHelpers.interopDefault(_dashboard);
+var _protected = require("./components/Protected");
+var _protectedDefault = parcelHelpers.interopDefault(_protected);
 const App = ()=>{
     //document.body.style.background = "#e6e1e1ff";
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "App",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Outlet), {}, void 0, false, {
             fileName: "App.js",
-            lineNumber: 12,
+            lineNumber: 13,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "App.js",
-        lineNumber: 11,
+        lineNumber: 12,
         columnNumber: 5
     }, undefined);
 };
@@ -755,12 +757,12 @@ const appRouter = (0, _reactRouterDom.createBrowserRouter)([
         path: "/",
         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
             fileName: "App.js",
-            lineNumber: 20,
+            lineNumber: 21,
             columnNumber: 14
         }, undefined),
         errorElement: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pokDefault.default), {}, void 0, false, {
             fileName: "App.js",
-            lineNumber: 21,
+            lineNumber: 22,
             columnNumber: 19
         }, undefined),
         children: [
@@ -768,25 +770,34 @@ const appRouter = (0, _reactRouterDom.createBrowserRouter)([
                 path: "/",
                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signUpDefault.default), {}, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 25,
+                    lineNumber: 26,
                     columnNumber: 18
                 }, undefined)
             },
             {
-                path: "/Body",
-                element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _bodyDefault.default), {}, void 0, false, {
+                element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _protectedDefault.default), {}, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 29,
+                    lineNumber: 30,
                     columnNumber: 18
-                }, undefined)
-            },
-            {
-                path: "/Dashboard",
-                element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _dashboardDefault.default), {}, void 0, false, {
-                    fileName: "App.js",
-                    lineNumber: 33,
-                    columnNumber: 18
-                }, undefined)
+                }, undefined),
+                children: [
+                    {
+                        path: "/Body",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _bodyDefault.default), {}, void 0, false, {
+                            fileName: "App.js",
+                            lineNumber: 34,
+                            columnNumber: 22
+                        }, undefined)
+                    },
+                    {
+                        path: "/Dashboard",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _dashboardDefault.default), {}, void 0, false, {
+                            fileName: "App.js",
+                            lineNumber: 38,
+                            columnNumber: 22
+                        }, undefined)
+                    }
+                ]
             }
         ]
     }
@@ -796,7 +807,7 @@ root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.RouterP
     router: appRouter
 }, void 0, false, {
     fileName: "App.js",
-    lineNumber: 41,
+    lineNumber: 48,
     columnNumber: 13
 }, undefined)); // root.render(<App />);
 var _c;
@@ -807,7 +818,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react-dom/client":"hrvwu","./components/Body":"hjG3v","./components/Sign_up":"ivbA5","react-router-dom":"61z4w","./components/Pok":"2WfoL","./components/Dashboard":"afPWz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react-dom/client":"hrvwu","./components/Body":"hjG3v","./components/Sign_up":"ivbA5","react-router-dom":"61z4w","./components/Pok":"2WfoL","./components/Dashboard":"afPWz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./components/Protected":"bhKCF"}],"dVPUn":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -17490,8 +17501,20 @@ const Body = ()=>{
     const handledummy = ()=>{
         async function fetchdata() {
             try {
-                const getpost = await fetch("http://localhost:3000/Incoming");
+                const token = localStorage.getItem("token");
+                const getpost = await fetch("http://localhost:3000/Incoming", {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 const data = await getpost.json();
+                if (!Array.isArray(data)) {
+                    seterror(true);
+                    return;
+                }
+                console.log(data);
                 setlist(data);
             } catch (error) {
                 alert("Not able to fetch");
@@ -17514,6 +17537,10 @@ const Body = ()=>{
                     }
                 });
                 const data = await getpost.json();
+                if (!Array.isArray(data)) {
+                    seterror(true);
+                    return;
+                }
                 setlist(data);
                 console.log(data);
             } catch (error) {
@@ -17527,7 +17554,7 @@ const Body = ()=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarDefault.default), {}, void 0, false, {
                 fileName: "components/Body.js",
-                lineNumber: 53,
+                lineNumber: 69,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17539,7 +17566,7 @@ const Body = ()=>{
                         children: "+ Add Employee"
                     }, void 0, false, {
                         fileName: "components/Body.js",
-                        lineNumber: 55,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -17551,18 +17578,18 @@ const Body = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "components/Body.js",
-                        lineNumber: 58,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/Body.js",
-                lineNumber: 54,
+                lineNumber: 70,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "components/Body.js",
-                lineNumber: 63,
+                lineNumber: 79,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17576,7 +17603,7 @@ const Body = ()=>{
                                 children: "Name"
                             }, void 0, false, {
                                 fileName: "components/Body.js",
-                                lineNumber: 66,
+                                lineNumber: 82,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17584,7 +17611,7 @@ const Body = ()=>{
                                 children: "age"
                             }, void 0, false, {
                                 fileName: "components/Body.js",
-                                lineNumber: 67,
+                                lineNumber: 83,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17592,7 +17619,7 @@ const Body = ()=>{
                                 children: "City"
                             }, void 0, false, {
                                 fileName: "components/Body.js",
-                                lineNumber: 68,
+                                lineNumber: 84,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17600,13 +17627,13 @@ const Body = ()=>{
                                 children: "Action"
                             }, void 0, false, {
                                 fileName: "components/Body.js",
-                                lineNumber: 69,
+                                lineNumber: 85,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "components/Body.js",
-                        lineNumber: 65,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, undefined),
                     list.map((item, index)=>{
@@ -17615,34 +17642,34 @@ const Body = ()=>{
                             Show: ()=>handledummy()
                         }, index, false, {
                             fileName: "components/Body.js",
-                            lineNumber: 72,
+                            lineNumber: 88,
                             columnNumber: 18
                         }, undefined);
                     })
                 ]
             }, void 0, true, {
                 fileName: "components/Body.js",
-                lineNumber: 64,
+                lineNumber: 80,
                 columnNumber: 7
             }, undefined),
             value && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _addDefault.default), {
                 item: ()=>setvalue(false)
             }, void 0, false, {
                 fileName: "components/Body.js",
-                lineNumber: 75,
+                lineNumber: 91,
                 columnNumber: 17
             }, undefined),
             error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pokDefault.default), {
                 onClose: ()=>seterror(false)
             }, void 0, false, {
                 fileName: "components/Body.js",
-                lineNumber: 77,
+                lineNumber: 93,
                 columnNumber: 17
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/Body.js",
-        lineNumber: 52,
+        lineNumber: 68,
         columnNumber: 5
     }, undefined);
 };
@@ -17676,10 +17703,12 @@ const List = ({ res, Show })=>{
     _s();
     const [update, setupdate] = (0, _react.useState)(false);
     const handleDelete = async ()=>{
+        const token = localStorage.getItem("token");
         const Item = await fetch(`http://localhost:3000/Incoming/${res.id}`, {
             method: "DELETE",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                Authorization: `Bearer ${token}`
             }
         });
         if (Item.ok) Show();
@@ -17692,7 +17721,7 @@ const List = ({ res, Show })=>{
                 children: res.name
             }, void 0, false, {
                 fileName: "components/list.js",
-                lineNumber: 21,
+                lineNumber: 23,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17700,7 +17729,7 @@ const List = ({ res, Show })=>{
                 children: res.age
             }, void 0, false, {
                 fileName: "components/list.js",
-                lineNumber: 22,
+                lineNumber: 24,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17708,7 +17737,7 @@ const List = ({ res, Show })=>{
                 children: res.City
             }, void 0, false, {
                 fileName: "components/list.js",
-                lineNumber: 23,
+                lineNumber: 25,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17720,7 +17749,7 @@ const List = ({ res, Show })=>{
                         children: "Delete"
                     }, void 0, false, {
                         fileName: "components/list.js",
-                        lineNumber: 25,
+                        lineNumber: 27,
                         columnNumber: 9
                     }, undefined),
                     "   ",
@@ -17730,7 +17759,7 @@ const List = ({ res, Show })=>{
                         children: "Update"
                     }, void 0, false, {
                         fileName: "components/list.js",
-                        lineNumber: 29,
+                        lineNumber: 31,
                         columnNumber: 9
                     }, undefined),
                     update && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateDefault.default), {
@@ -17738,19 +17767,19 @@ const List = ({ res, Show })=>{
                         prop: res
                     }, void 0, false, {
                         fileName: "components/list.js",
-                        lineNumber: 32,
+                        lineNumber: 34,
                         columnNumber: 20
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/list.js",
-                lineNumber: 24,
+                lineNumber: 26,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/list.js",
-        lineNumber: 20,
+        lineNumber: 22,
         columnNumber: 5
     }, undefined);
 };
@@ -20301,10 +20330,12 @@ const Add = ({ item })=>{
         });
     };
     const handleSubmit = async (form)=>{
+        const token = localStorage.getItem("token");
         await fetch("http://localhost:3000/Incoming", {
             method: "POST",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(form)
         });
@@ -20328,7 +20359,7 @@ const Add = ({ item })=>{
                     children: "\u2716"
                 }, void 0, false, {
                     fileName: "components/Add.js",
-                    lineNumber: 35,
+                    lineNumber: 38,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -20340,17 +20371,17 @@ const Add = ({ item })=>{
                                     children: "Name"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 41,
+                                    lineNumber: 44,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 42,
+                                    lineNumber: 45,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 43,
+                                    lineNumber: 46,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -20360,13 +20391,13 @@ const Add = ({ item })=>{
                                     onChange: handleChange
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 44,
+                                    lineNumber: 47,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Add.js",
-                            lineNumber: 40,
+                            lineNumber: 43,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -20375,17 +20406,17 @@ const Add = ({ item })=>{
                                     children: "age"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 53,
+                                    lineNumber: 56,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 54,
+                                    lineNumber: 57,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 55,
+                                    lineNumber: 58,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -20395,13 +20426,13 @@ const Add = ({ item })=>{
                                     onChange: handleChange
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 56,
+                                    lineNumber: 59,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Add.js",
-                            lineNumber: 52,
+                            lineNumber: 55,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -20410,17 +20441,17 @@ const Add = ({ item })=>{
                                     children: "city"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 65,
+                                    lineNumber: 68,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 66,
+                                    lineNumber: 69,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 67,
+                                    lineNumber: 70,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -20430,13 +20461,13 @@ const Add = ({ item })=>{
                                     onChange: handleChange
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 68,
+                                    lineNumber: 71,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Add.js",
-                            lineNumber: 64,
+                            lineNumber: 67,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -20445,24 +20476,24 @@ const Add = ({ item })=>{
                             children: "Submit"
                         }, void 0, false, {
                             fileName: "components/Add.js",
-                            lineNumber: 75,
+                            lineNumber: 78,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "components/Add.js",
-                    lineNumber: 39,
+                    lineNumber: 42,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "components/Add.js",
-            lineNumber: 34,
+            lineNumber: 37,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "components/Add.js",
-        lineNumber: 33,
+        lineNumber: 36,
         columnNumber: 5
     }, undefined);
 };
@@ -27874,8 +27905,9 @@ const Signup = ()=>{
                 console.log("Token stored:", localStorage.getItem("token"));
                 navigate("/Dashboard");
             } else alert("Invalid User");
-        } catch (error) {}
-        alert("Backend is not Active");
+        } catch (error) {
+            alert("Backend is not Active");
+        }
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "Signup",
@@ -27892,7 +27924,7 @@ const Signup = ()=>{
                                 children: "Welcome Back"
                             }, void 0, false, {
                                 fileName: "components/Sign_up.js",
-                                lineNumber: 43,
+                                lineNumber: 44,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27901,23 +27933,23 @@ const Signup = ()=>{
                                     children: "A login page is where registered users can securely access their account. These pages usually include a username or email field, a password field, and a submit button."
                                 }, void 0, false, {
                                     fileName: "components/Sign_up.js",
-                                    lineNumber: 45,
+                                    lineNumber: 46,
                                     columnNumber: 15
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "components/Sign_up.js",
-                                lineNumber: 44,
+                                lineNumber: 45,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "components/Sign_up.js",
-                        lineNumber: 42,
+                        lineNumber: 43,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "components/Sign_up.js",
-                    lineNumber: 41,
+                    lineNumber: 42,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27930,17 +27962,17 @@ const Signup = ()=>{
                                 children: "Sign Up"
                             }, void 0, false, {
                                 fileName: "components/Sign_up.js",
-                                lineNumber: 55,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                fileName: "components/Sign_up.js",
                                 lineNumber: 56,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                 fileName: "components/Sign_up.js",
                                 lineNumber: 57,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                fileName: "components/Sign_up.js",
+                                lineNumber: 58,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27951,7 +27983,7 @@ const Signup = ()=>{
                                         children: "Email Address"
                                     }, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 59,
+                                        lineNumber: 60,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -27963,12 +27995,12 @@ const Signup = ()=>{
                                         onChange: handleChange
                                     }, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 60,
+                                        lineNumber: 61,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 68,
+                                        lineNumber: 69,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -27976,7 +28008,7 @@ const Signup = ()=>{
                                         children: "Password"
                                     }, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 69,
+                                        lineNumber: 70,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -27988,12 +28020,12 @@ const Signup = ()=>{
                                         onChange: handleChange
                                     }, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 70,
+                                        lineNumber: 71,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 78,
+                                        lineNumber: 79,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28002,35 +28034,35 @@ const Signup = ()=>{
                                         children: "Log In"
                                     }, void 0, false, {
                                         fileName: "components/Sign_up.js",
-                                        lineNumber: 79,
+                                        lineNumber: 80,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "components/Sign_up.js",
-                                lineNumber: 58,
+                                lineNumber: 59,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "components/Sign_up.js",
-                        lineNumber: 54,
+                        lineNumber: 55,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "components/Sign_up.js",
-                    lineNumber: 53,
+                    lineNumber: 54,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "components/Sign_up.js",
-            lineNumber: 40,
+            lineNumber: 41,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "components/Sign_up.js",
-        lineNumber: 39,
+        lineNumber: 40,
         columnNumber: 5
     }, undefined);
 };
@@ -28234,6 +28266,43 @@ $RefreshReg$(_c, "Dashboard");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react-router":"4ChVy","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}]},["icAAj","blcJa"], "blcJa", "parcelRequire8d29", {}, null, null, "http://localhost:1234")
+},{"react/jsx-dev-runtime":"dVPUn","react-router":"4ChVy","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"bhKCF":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$5be0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$5be0.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$5be0.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _reactRouterDom = require("react-router-dom");
+const Protected = ()=>{
+    const token = localStorage.getItem("token");
+    if (token === null) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
+        to: "/"
+    }, void 0, false, {
+        fileName: "components/Protected.js",
+        lineNumber: 7,
+        columnNumber: 12
+    }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Outlet), {}, void 0, false, {
+        fileName: "components/Protected.js",
+        lineNumber: 10,
+        columnNumber: 10
+    }, undefined);
+};
+_c = Protected;
+exports.default = Protected;
+var _c;
+$RefreshReg$(_c, "Protected");
+
+  $parcel$ReactRefreshHelpers$5be0.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}]},["icAAj","blcJa"], "blcJa", "parcelRequire8d29", {}, null, null, "http://localhost:1234")
 
 //# sourceMappingURL=Front-end.cb65f72e.js.map

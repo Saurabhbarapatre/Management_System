@@ -12,8 +12,20 @@ const Body = () => {
   const handledummy = () => {
     async function fetchdata() {
       try {
-        const getpost = await fetch("http://localhost:3000/Incoming");
+        const token = localStorage.getItem("token");
+        const getpost = await fetch("http://localhost:3000/Incoming", {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = await getpost.json();
+        if (!Array.isArray(data)) {
+          seterror(true);
+          return;
+        }
+        console.log(data);
         setlist(data);
       } catch (error) {
         alert("Not able to fetch");
@@ -39,6 +51,10 @@ const Body = () => {
           },
         });
         const data = await getpost.json();
+        if (!Array.isArray(data)) {
+          seterror(true);
+          return;
+        }
         setlist(data);
         console.log(data);
       } catch (error) {

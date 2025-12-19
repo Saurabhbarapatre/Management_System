@@ -12,13 +12,16 @@ const Add = ({ item }) => {
   };
 
   const handleSubmit = async (form) => {
+    const token = localStorage.getItem("token");
     await fetch("http://localhost:3000/Incoming", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(form),
     });
+
     console.log(form);
     setform({
       name: "",

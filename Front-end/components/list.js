@@ -5,10 +5,12 @@ const List = ({ res, Show }) => {
   const [update, setupdate] = useState(false);
 
   const handleDelete = async () => {
+    const token = localStorage.getItem("token");
     const Item = await fetch(`http://localhost:3000/Incoming/${res.id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
     if (Item.ok) {

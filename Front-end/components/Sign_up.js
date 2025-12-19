@@ -31,8 +31,9 @@ const Signup = () => {
       } else {
         alert("Invalid User");
       }
-    } catch (error) {}
-    alert("Backend is not Active");
+    } catch (error) {
+      alert("Backend is not Active");
+    }
   };
 
   return (

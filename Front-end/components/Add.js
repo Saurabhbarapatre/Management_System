@@ -11,6 +11,12 @@ const Add = ({ item }) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
 
+  const valid = /[^a-zA-Z ]/.test(form.name);
+
+  const num = form.age === "" || /^\d+$/.test(form.age);
+
+  const Town = /[^a-zA-Z ]/.test(form.city);
+
   const handleSubmit = async (form) => {
     const token = localStorage.getItem("token");
     await fetch("http://localhost:3000/Incoming", {
@@ -49,6 +55,7 @@ const Add = ({ item }) => {
               placeholder="Name"
               value={form.name}
               onChange={handleChange}
+              className={valid ? "Name-error" : "Name"}
             ></input>
           </div>
 
@@ -61,6 +68,7 @@ const Add = ({ item }) => {
               placeholder="age"
               value={form.age}
               onChange={handleChange}
+              className={num ? "Age" : "Age-error"}
             ></input>
           </div>
 
@@ -73,6 +81,7 @@ const Add = ({ item }) => {
               placeholder="city"
               value={form.city}
               onChange={handleChange}
+              className={Town ? "City-error" : "City"}
             ></input>
           </div>
           <button className="submit" onClick={() => handleSubmit(form)}>

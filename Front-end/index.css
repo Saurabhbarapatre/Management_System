@@ -122,12 +122,60 @@ body {
   margin-left: 20px;
 }
 
-input {
+/* input {
   width: 90%;
   height: 22px;
   border: none;
   border-bottom: 1px solid black;
   box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+} */
+
+.Name {
+  width: 90%;
+  height: 22px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+}
+
+.Name-error {
+  width: 90%;
+  height: 22px;
+  border: 2px solid red;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  outline: none;
+}
+
+.Age {
+  width: 90%;
+  height: 22px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+}
+
+.Age-error {
+  width: 90%;
+  height: 22px;
+  border: 2px solid red;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  outline: none;
+}
+
+.City {
+  width: 90%;
+  height: 22px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+}
+
+.City-error {
+  width: 90%;
+  height: 22px;
+  border: 2px solid red;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  outline: none;
 }
 
 .submit {

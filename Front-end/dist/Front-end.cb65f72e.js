@@ -20329,6 +20329,9 @@ const Add = ({ item })=>{
             [e.target.name]: e.target.value
         });
     };
+    const valid = /[^a-zA-Z ]/.test(form.name);
+    const num = form.age === "" || /^\d+$/.test(form.age);
+    const Town = /[^a-zA-Z ]/.test(form.city);
     const handleSubmit = async (form)=>{
         const token = localStorage.getItem("token");
         await fetch("http://localhost:3000/Incoming", {
@@ -20359,7 +20362,7 @@ const Add = ({ item })=>{
                     children: "\u2716"
                 }, void 0, false, {
                     fileName: "components/Add.js",
-                    lineNumber: 38,
+                    lineNumber: 44,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -20371,33 +20374,34 @@ const Add = ({ item })=>{
                                     children: "Name"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 44,
+                                    lineNumber: 50,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 45,
+                                    lineNumber: 51,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 46,
+                                    lineNumber: 52,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                     name: "name",
                                     placeholder: "Name",
                                     value: form.name,
-                                    onChange: handleChange
+                                    onChange: handleChange,
+                                    className: valid ? "Name-error" : "Name"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 47,
+                                    lineNumber: 53,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Add.js",
-                            lineNumber: 43,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -20406,33 +20410,34 @@ const Add = ({ item })=>{
                                     children: "age"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 56,
+                                    lineNumber: 63,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 57,
+                                    lineNumber: 64,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 58,
+                                    lineNumber: 65,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                     name: "age",
                                     placeholder: "age",
                                     value: form.age,
-                                    onChange: handleChange
+                                    onChange: handleChange,
+                                    className: num ? "Age" : "Age-error"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 59,
+                                    lineNumber: 66,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Add.js",
-                            lineNumber: 55,
+                            lineNumber: 62,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -20441,33 +20446,34 @@ const Add = ({ item })=>{
                                     children: "city"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 68,
+                                    lineNumber: 76,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 69,
+                                    lineNumber: 77,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 70,
+                                    lineNumber: 78,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                     name: "city",
                                     placeholder: "city",
                                     value: form.city,
-                                    onChange: handleChange
+                                    onChange: handleChange,
+                                    className: Town ? "City-error" : "City"
                                 }, void 0, false, {
                                     fileName: "components/Add.js",
-                                    lineNumber: 71,
+                                    lineNumber: 79,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Add.js",
-                            lineNumber: 67,
+                            lineNumber: 75,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -20476,24 +20482,24 @@ const Add = ({ item })=>{
                             children: "Submit"
                         }, void 0, false, {
                             fileName: "components/Add.js",
-                            lineNumber: 78,
+                            lineNumber: 87,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "components/Add.js",
-                    lineNumber: 42,
+                    lineNumber: 48,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "components/Add.js",
-            lineNumber: 37,
+            lineNumber: 43,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "components/Add.js",
-        lineNumber: 36,
+        lineNumber: 42,
         columnNumber: 5
     }, undefined);
 };

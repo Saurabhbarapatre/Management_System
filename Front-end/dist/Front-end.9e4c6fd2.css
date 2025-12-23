@@ -120,9 +120,49 @@ body {
   display: flex;
 }
 
-input {
+.Name {
   border: none;
   border-bottom: 1px solid #000;
+  width: 90%;
+  height: 22px;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+}
+
+.Name-error {
+  border: 2px solid red;
+  outline: none;
+  width: 90%;
+  height: 22px;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+}
+
+.Age {
+  border: none;
+  border-bottom: 1px solid #000;
+  width: 90%;
+  height: 22px;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+}
+
+.Age-error {
+  border: 2px solid red;
+  outline: none;
+  width: 90%;
+  height: 22px;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+}
+
+.City {
+  border: none;
+  border-bottom: 1px solid #000;
+  width: 90%;
+  height: 22px;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+}
+
+.City-error {
+  border: 2px solid red;
+  outline: none;
   width: 90%;
   height: 22px;
   box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;

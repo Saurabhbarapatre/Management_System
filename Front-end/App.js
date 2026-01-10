@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Pok from "./components/Pok";
 import Dashboard from "./components/Dashboard";
 import Protected from "./components/Protected";
+import Onboard from "./components/Onboard";
 
 const App = () => {
   //document.body.style.background = "#e6e1e1ff";
@@ -36,6 +37,10 @@ const appRouter = createBrowserRouter([
           {
             path: "/Dashboard",
             element: <Dashboard />,
+          },
+          {
+            path: "/OnBoard",
+            element: <Onboard/>,
           },
         ],
       },

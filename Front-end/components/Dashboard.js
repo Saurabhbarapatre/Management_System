@@ -22,9 +22,9 @@ const Dashboard = () => {
             <span className="dash-card" onClick={() => navigate("/Body")}>
               Employee Management
             </span>
-            <span className="dash-card">
-              Attendance history
-              <label className="load">Comming Soon</label>
+            <span className="dash-card" onClick={()=> navigate("/OnBoard")}>
+              Employee OnBoarding
+             
             </span>
             <span className="dash-card">
               Leader-Board

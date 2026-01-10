@@ -83,6 +83,16 @@ body {
   font-size: small;
 }
 
+.Onboard-bg {
+  background: #0009;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+}
+
 .modal {
   background: #0009;
   justify-content: center;
@@ -99,7 +109,7 @@ body {
   background: #fff;
   border-radius: 10px;
   width: 40%;
-  height: 80%;
+  height: 100%;
 }
 
 .cross {
@@ -117,6 +127,100 @@ body {
   height: 100%;
   margin-top: 60px;
   margin-left: 20px;
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.formik-box {
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.error {
+  color: red;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.formik-box div {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.mini-head {
+  font-weight: bold;
+}
+
+.test {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.field {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.field:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.formik-box button {
+  color: #fff;
+  cursor: pointer;
+  background: #4a90e2;
+  border: none;
+  border-radius: 4px;
+  width: 120px;
+  padding: 8px;
+}
+
+.formik-box button:hover {
+  background: #357bd8;
+}
+
+.inner-box {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  overflow-y: auto;
+}
+
+.identity-card {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.remove-btn {
+  background: red;
+  margin-top: 6px;
+}
+
+.add-btn {
+  margin-bottom: 10px;
+}
+
+.step-actions {
+  gap: 10px;
   display: flex;
 }
 

@@ -84,6 +84,17 @@ body {
   cursor: pointer;
 }
 
+/* Form */
+.Onboard-bg {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal {
   position: fixed;
   background: black;
@@ -98,7 +109,7 @@ body {
 }
 
 .box {
-  height: 80%;
+  height: 100%;
   width: 40%;
   background: white;
   border-radius: 10px;
@@ -120,6 +131,241 @@ body {
   width: 100%;
   gap: 50px;
   margin-left: 20px;
+}
+
+/* Formik */
+* {
+  box-sizing: border-box;
+}
+
+.formik-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.formik-box
+  div:not(.Pro-bar):not(.Pro-bar-small):not(.Pro-bar-2):not(
+    .Pro-bar-small-2
+  ):not(.Pro-bar-3):not(.Pro-bar-small-3):not(.Pro-bar-4):not(
+    .Pro-bar-small-4
+  ):not(.Pro-bar-5):not(.Pro-bar-small-5) {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mini-head {
+  font-weight: bold;
+}
+
+.test {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.field {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.field:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.fivth-form {
+  height: auto;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 113, 206, 1) 0%,
+    rgba(0, 74, 144, 1) 100%
+  );
+
+  color: #ffffff;
+  padding-left: 5px;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.Pro-bar {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small {
+  margin: 0;
+  padding: 0;
+  width: 0%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-2 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-2 {
+  margin: 0;
+  padding: 0;
+  width: 20%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-3 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-3 {
+  margin: 0;
+  padding: 0;
+  width: 45%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-4 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-4 {
+  margin: 0;
+  padding: 0;
+  width: 75%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-5 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-5 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-head {
+  font-weight: bolder;
+}
+
+.final-btn {
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.formik-box button {
+  width: 120px;
+  padding: 8px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.formik-box button:hover {
+  background: #357bd8;
+}
+
+.Grand-parent {
+  height: 100%;
+  width: 100%;
+}
+
+.inner-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.identity-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.reset {
+  background: red;
+}
+
+.remove-btn {
+  margin-top: 6px;
+  background: red;
+}
+
+.add-btn {
+  margin-bottom: 10px;
+}
+
+.step-actions {
+  display: flex;
+  gap: 10px;
 }
 
 /* input {

@@ -83,6 +83,16 @@ body {
   font-size: small;
 }
 
+.Onboard-bg {
+  background: #0009;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+}
+
 .modal {
   background: #0009;
   justify-content: center;
@@ -99,7 +109,7 @@ body {
   background: #fff;
   border-radius: 10px;
   width: 40%;
-  height: 80%;
+  height: 100%;
 }
 
 .cross {
@@ -117,6 +127,230 @@ body {
   height: 100%;
   margin-top: 60px;
   margin-left: 20px;
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.formik-box {
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.error {
+  color: red;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.formik-box div:not(.Pro-bar):not(.Pro-bar-small):not(.Pro-bar-2):not(.Pro-bar-small-2):not(.Pro-bar-3):not(.Pro-bar-small-3):not(.Pro-bar-4):not(.Pro-bar-small-4):not(.Pro-bar-5):not(.Pro-bar-small-5) {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.mini-head {
+  font-weight: bold;
+}
+
+.test {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.field {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.field:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.fivth-form {
+  color: #fff;
+  background: linear-gradient(90deg, #0071ce 0%, #004a90 100%);
+  width: 100%;
+  height: auto;
+  padding-left: 5px;
+  font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.Pro-bar {
+  border: 1px solid #000;
+  justify-content: center;
+  width: 100%;
+  height: 18px;
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+}
+
+.Pro-bar-small {
+  background: #02ac0299;
+  width: 0%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-2 {
+  border: 1px solid #000;
+  justify-content: center;
+  width: 100%;
+  height: 18px;
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+}
+
+.Pro-bar-small-2 {
+  background: #02ac0299;
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-3 {
+  border: 1px solid #000;
+  justify-content: center;
+  width: 100%;
+  height: 18px;
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+}
+
+.Pro-bar-small-3 {
+  background: #02ac0299;
+  width: 45%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-4 {
+  border: 1px solid #000;
+  justify-content: center;
+  width: 100%;
+  height: 18px;
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+}
+
+.Pro-bar-small-4 {
+  background: #02ac0299;
+  width: 75%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-5 {
+  border: 1px solid #000;
+  justify-content: center;
+  width: 100%;
+  height: 18px;
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+}
+
+.Pro-bar-small-5 {
+  background: #02ac0299;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-head {
+  font-weight: bolder;
+}
+
+.final-btn {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.formik-box button {
+  color: #fff;
+  cursor: pointer;
+  background: #4a90e2;
+  border: none;
+  border-radius: 4px;
+  width: 120px;
+  padding: 8px;
+}
+
+.formik-box button:hover {
+  background: #357bd8;
+}
+
+.Grand-parent {
+  width: 100%;
+  height: 100%;
+}
+
+.inner-box {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  overflow-y: auto;
+}
+
+.identity-card {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.reset {
+  background: red;
+}
+
+.remove-btn {
+  background: red;
+  margin-top: 6px;
+}
+
+.add-btn {
+  margin-bottom: 10px;
+}
+
+.step-actions {
+  gap: 10px;
   display: flex;
 }
 

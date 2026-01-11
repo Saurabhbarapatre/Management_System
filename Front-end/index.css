@@ -153,7 +153,12 @@ body {
   margin-top: 4px;
 }
 
-.formik-box div {
+.formik-box
+  div:not(.Pro-bar):not(.Pro-bar-small):not(.Pro-bar-2):not(
+    .Pro-bar-small-2
+  ):not(.Pro-bar-3):not(.Pro-bar-small-3):not(.Pro-bar-4):not(
+    .Pro-bar-small-4
+  ):not(.Pro-bar-5):not(.Pro-bar-small-5) {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -183,6 +188,132 @@ body {
   border-color: #4a90e2;
 }
 
+.fivth-form {
+  height: auto;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 113, 206, 1) 0%,
+    rgba(0, 74, 144, 1) 100%
+  );
+
+  color: #ffffff;
+  padding-left: 5px;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.Pro-bar {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small {
+  margin: 0;
+  padding: 0;
+  width: 0%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-2 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-2 {
+  margin: 0;
+  padding: 0;
+  width: 20%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-3 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-3 {
+  margin: 0;
+  padding: 0;
+  width: 45%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-4 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-4 {
+  margin: 0;
+  padding: 0;
+  width: 75%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-5 {
+  height: 18px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.Pro-bar-small-5 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(2, 172, 2, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.Pro-bar-head {
+  font-weight: bolder;
+}
+
+.final-btn {
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
 .formik-box button {
   width: 120px;
   padding: 8px;
@@ -195,6 +326,11 @@ body {
 
 .formik-box button:hover {
   background: #357bd8;
+}
+
+.Grand-parent {
+  height: 100%;
+  width: 100%;
 }
 
 .inner-box {
@@ -212,6 +348,10 @@ body {
   margin-bottom: 10px;
   border-radius: 6px;
   width: 100%;
+}
+
+.reset {
+  background: red;
 }
 
 .remove-btn {

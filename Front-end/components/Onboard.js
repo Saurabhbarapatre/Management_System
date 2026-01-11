@@ -1,6 +1,23 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useFormikContext } from "formik";
+import { useEffect } from "react";
+
+const ScrollToFirstError = () => {
+  const { errors, submitCount } = useFormikContext();
+
+  useEffect(() => {
+    if (submitCount > 0 && Object.keys(errors).length > 0) {
+      const firstError = document.querySelector(".error");
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [errors, submitCount]);
+
+  return null;
+};
 
 const Onboard = () => {
   const [step, setStep] = useState(1);
@@ -39,12 +56,10 @@ const Onboard = () => {
 
   useEffect(() => {
     const stored = localStorage.getItem("onboard-form");
-
     if (stored) {
       const parsed = JSON.parse(stored);
-
-      setInitialValues({
-        ...initialValues,
+      setInitialValues((prev) => ({
+        ...prev,
         ...parsed,
         identityProofs: Array.isArray(parsed.identityProofs)
           ? parsed.identityProofs
@@ -56,7 +71,10 @@ const Onboard = () => {
                 file: null,
               },
             ],
-      });
+        emergencyContacts: Array.isArray(parsed.emergencyContacts)
+          ? parsed.emergencyContacts
+          : [{ name: "", relationship: "", phone: "" }],
+      }));
     }
   }, []);
 
@@ -81,25 +99,18 @@ const Onboard = () => {
       }),
     gender: Yup.string().required("Gender is required"),
     maritalStatus: Yup.string().required("Marital status is required"),
-    spouseName: Yup.string().when(
-      "maritalStatus",
-      function (maritalStatus, schema) {
-        if (maritalStatus === "Married") {
-          return schema.required("Spouse name is required");
-        } else {
-          return schema.notRequired();
-        }
-      }
+    spouseName: Yup.string().when("maritalStatus", (maritalStatus, schema) =>
+      maritalStatus === "Married"
+        ? schema.required("Spouse name is required")
+        : schema.notRequired()
     ),
   });
 
   const bankIdentitySchema = Yup.object({
     Bank_name: Yup.string().required("Bank name is required"),
-
     IFSC_code: Yup.string()
       .matches(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Invalid IFSC code")
       .required("IFSC code is required"),
-
     identityProofs: Yup.array().of(
       Yup.object({
         accountNumber: Yup.string()
@@ -107,11 +118,8 @@ const Onboard = () => {
           .min(9, "Minimum 9 digits")
           .max(18, "Maximum 18 digits")
           .required("Account number is required"),
-
         identityType: Yup.string().required("Identity type is required"),
-
         identityNumber: Yup.string().required("Identity number is required"),
-
         file: Yup.mixed().required("File is required"),
       })
     ),
@@ -126,9 +134,7 @@ const Onboard = () => {
           name: Yup.string()
             .required("Contact name is required")
             .min(3, "Minimum 3 characters"),
-
           relationship: Yup.string().required("Relationship is required"),
-
           phone: Yup.string()
             .matches(/^\d{10}$/, "Phone number must be 10 digits")
             .required("Phone number is required"),
@@ -136,38 +142,68 @@ const Onboard = () => {
       ),
   });
 
+  const getValidationSchema = () => {
+    if (step === 1) return personalSchema;
+    if (step === 3) return bankIdentitySchema;
+    if (step === 4) return emergencySchema;
+    return null;
+  };
+
+  const handleclick = (resetForm) => {
+    localStorage.removeItem("onboard-form");
+    resetForm();
+    setStep(1);
+  };
+
   return (
     <div className="Onboard-bg">
       <div className="box">
         <div className="inner-box">
           <Formik
-            key={step}
             enableReinitialize
             initialValues={initialValues}
-            validationSchema={
-              step === 1
-                ? personalSchema
-                : step === 3
-                ? bankIdentitySchema
-                : step === 4
-                ? emergencySchema
-                : null
-            }
-            validateOnChange={false}
+            validationSchema={getValidationSchema()}
+            validateOnChange={true}
             validateOnBlur={true}
-            onSubmit={(values) => {
+            onSubmit={async (values, { setTouched, resetForm }) => {
               localStorage.setItem("onboard-form", JSON.stringify(values));
-              if (step === 1) setStep(2);
-              else if (step === 2) setStep(3);
-              else if (step === 3) setStep(4);
+              setTouched({});
+
+              if (step < 5) {
+                setStep(step + 1);
+                return;
+              }
+
+              let obj = {};
+              obj.name = values.fullName;
+              obj.age = values.dob;
+              obj.city = values.Department;
+
+              const token = localStorage.getItem("token");
+
+              await fetch("http://localhost:3000/Incoming", {
+                method: "POST",
+                headers: {
+                  "Content-type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(obj),
+              });
+
+              resetForm();
+              localStorage.removeItem("onboard-form");
+              setStep(1);
+
+              alert("Success ✅");
             }}
           >
-            {({ values, touched, errors, setFieldValue }) => (
+            {({ values, touched, errors, setFieldValue, resetForm }) => (
               <Form className="formik-box">
+                <ScrollToFirstError />
                 {step === 1 && (
-                  <>
+                  <div className="Grand-parent">
+                    {"Step 1 of 5"}
                     <h2>Personal Details</h2>
-
                     <label className="mini-head">Full Name</label>
                     <Field name="fullName" className="field" />
                     {touched.fullName && errors.fullName && (
@@ -222,13 +258,18 @@ const Onboard = () => {
                         )}
                       </>
                     )}
-
+                    <br></br>
                     <button type="submit">Next</button>
-                  </>
+                    <div className="Pro-bar">
+                      <span className="Pro-bar-head">0%</span>
+                      <div className="Pro-bar-small"></div>
+                    </div>
+                  </div>
                 )}
 
                 {step === 2 && (
-                  <>
+                  <div className="Grand-parent">
+                    {"Step 2 of 5"}
                     <h2>Employment Details</h2>
 
                     <label className="mini-head">Employee ID</label>
@@ -284,157 +325,163 @@ const Onboard = () => {
                         />
                       </>
                     )}
-
+                    <br></br>
                     <button type="button" onClick={() => setStep(1)}>
                       Back
                     </button>
+                    <br></br>
                     <button type="submit">Next</button>
-                  </>
+                    <br></br>
+                    <div className="Pro-bar-2">
+                      <span className="Pro-bar-head">20%</span>
+                      <div className="Pro-bar-small-2"></div>
+                    </div>
+                  </div>
                 )}
 
                 {step === 3 && (
-                  <>
-                    <h2>Bank & Identity Details</h2>
+                  <div className="Grand-parent">
+                    {"Step 3 of 5"}
+                    <div key={`step3`}>
+                      <h2>Bank & Identity Details</h2>
 
-                    {/* Bank Name */}
-                    <label className="mini-head">Bank Name</label>
-                    <Field name="Bank_name" className="field" />
-                    {touched.Bank_name && errors.Bank_name && (
-                      <div className="error">{errors.Bank_name}</div>
-                    )}
+                      <label className="mini-head">Bank Name</label>
+                      <Field name="Bank_name" className="field" />
+                      {touched.Bank_name && errors.Bank_name && (
+                        <div className="error">{errors.Bank_name}</div>
+                      )}
 
-                    {/* IFSC */}
-                    <label className="mini-head">IFSC Code</label>
-                    <Field name="IFSC_code" className="field" />
-                    {touched.IFSC_code && errors.IFSC_code && (
-                      <div className="error">{errors.IFSC_code}</div>
-                    )}
+                      <label className="mini-head">IFSC Code</label>
+                      <Field name="IFSC_code" className="field" />
+                      {touched.IFSC_code && errors.IFSC_code && (
+                        <div className="error">{errors.IFSC_code}</div>
+                      )}
 
-                    <h3>Identity Proofs</h3>
+                      <h3>Identity Proofs</h3>
+                      {values.identityProofs.map((_, index) => (
+                        <div key={index} className="identity-card">
+                          <label className="mini-head">Account Number</label>
+                          <Field
+                            name={`identityProofs.${index}.accountNumber`}
+                            className="field"
+                          />
+                          {touched.identityProofs?.[index]?.accountNumber &&
+                            errors.identityProofs?.[index]?.accountNumber && (
+                              <div className="error">
+                                {errors.identityProofs[index].accountNumber}
+                              </div>
+                            )}
 
-                    {values.identityProofs.map((_, index) => (
-                      <div key={index} className="identity-card">
-                        {/* Account Number */}
-                        <label className="mini-head">Account Number</label>
-                        <Field
-                          name={`identityProofs.${index}.accountNumber`}
-                          className="field"
-                        />
-                        {touched.identityProofs?.[index]?.accountNumber &&
-                          errors.identityProofs?.[index]?.accountNumber && (
-                            <div className="error">
-                              {errors.identityProofs[index].accountNumber}
-                            </div>
-                          )}
+                          <label className="mini-head">Identity Type</label>
+                          <Field
+                            as="select"
+                            name={`identityProofs.${index}.identityType`}
+                            className="field"
+                          >
+                            <option value="">Select</option>
+                            <option value="Aadhaar">Aadhaar</option>
+                            <option value="Passport">Passport</option>
+                            <option value="PAN">PAN</option>
+                          </Field>
+                          {touched.identityProofs?.[index]?.identityType &&
+                            errors.identityProofs?.[index]?.identityType && (
+                              <div className="error">
+                                {errors.identityProofs[index].identityType}
+                              </div>
+                            )}
 
-                        {/* Identity Type */}
-                        <label className="mini-head">Identity Type</label>
-                        <Field
-                          as="select"
-                          name={`identityProofs.${index}.identityType`}
-                          className="field"
-                        >
-                          <option value="">Select</option>
-                          <option value="Aadhaar">Aadhaar</option>
-                          <option value="Passport">Passport</option>
-                          <option value="PAN">PAN</option>
-                        </Field>
-                        {touched.identityProofs?.[index]?.identityType &&
-                          errors.identityProofs?.[index]?.identityType && (
-                            <div className="error">
-                              {errors.identityProofs[index].identityType}
-                            </div>
-                          )}
+                          <label className="mini-head">Identity Number</label>
+                          <Field
+                            name={`identityProofs.${index}.identityNumber`}
+                            className="field"
+                          />
+                          {touched.identityProofs?.[index]?.identityNumber &&
+                            errors.identityProofs?.[index]?.identityNumber && (
+                              <div className="error">
+                                {errors.identityProofs[index].identityNumber}
+                              </div>
+                            )}
 
-                        {/* Identity Number */}
-                        <label className="mini-head">Identity Number</label>
-                        <Field
-                          name={`identityProofs.${index}.identityNumber`}
-                          className="field"
-                        />
-                        {touched.identityProofs?.[index]?.identityNumber &&
-                          errors.identityProofs?.[index]?.identityNumber && (
-                            <div className="error">
-                              {errors.identityProofs[index].identityNumber}
-                            </div>
-                          )}
-
-                        {/* File */}
-                        <label className="mini-head">Upload File</label>
-                        <input
-                          type="file"
-                          className="field"
-                          onChange={(e) => {
-                            setFieldValue(
-                              `identityProofs.${index}.file`,
-                              e.currentTarget.files[0],
-                              true // ✅ force validation
-                            );
-                          }}
-                          onBlur={() =>
-                            setFieldValue(
-                              `identityProofs.${index}.file`,
-                              values.identityProofs[index].file,
-                              true
-                            )
-                          }
-                        />
-                        {touched.identityProofs?.[index]?.file &&
-                          errors.identityProofs?.[index]?.file && (
-                            <div className="error">
-                              {errors.identityProofs[index].file}
-                            </div>
-                          )}
-
-                        <button
-                          type="button"
-                          className="remove-btn"
-                          onClick={() => {
-                            const updated = values.identityProofs.filter(
-                              (_, i) => i !== index
-                            );
-                            setFieldValue("identityProofs", updated);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))}
-
-                    <button
-                      type="button"
-                      className="add-btn"
-                      onClick={() =>
-                        setFieldValue("identityProofs", [
-                          ...values.identityProofs,
-                          {
-                            accountNumber: "",
-                            identityType: "",
-                            identityNumber: "",
-                            file: null,
-                          },
-                        ])
-                      }
-                    >
-                      Add Identity Proof
-                    </button>
-
-                    <div className="step-actions">
-                      <button type="button" onClick={() => setStep(2)}>
-                        Back
+                          <label className="mini-head">Upload File</label>
+                          <input
+                            type="file"
+                            className="field"
+                            onChange={(e) =>
+                              setFieldValue(
+                                `identityProofs.${index}.file`,
+                                e.currentTarget.files[0],
+                                true
+                              )
+                            }
+                            onBlur={() =>
+                              setFieldValue(
+                                `identityProofs.${index}.file`,
+                                values.identityProofs[index].file,
+                                true
+                              )
+                            }
+                          />
+                          {touched.identityProofs?.[index]?.file &&
+                            errors.identityProofs?.[index]?.file && (
+                              <div className="error">
+                                {errors.identityProofs[index].file}
+                              </div>
+                            )}
+                          <br></br>
+                          <button
+                            type="button"
+                            className="remove-btn"
+                            onClick={() => {
+                              const updated = values.identityProofs.filter(
+                                (_, i) => i !== index
+                              );
+                              setFieldValue("identityProofs", updated);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                      <br></br>
+                      <button
+                        type="button"
+                        className="add-btn"
+                        onClick={() =>
+                          setFieldValue("identityProofs", [
+                            ...values.identityProofs,
+                            {
+                              accountNumber: "",
+                              identityType: "",
+                              identityNumber: "",
+                              file: null,
+                            },
+                          ])
+                        }
+                      >
+                        Add Identity Proof
                       </button>
-                      <button type="submit">Next</button>
+                      <br></br>
+                      <div className="step-actions">
+                        <button type="button" onClick={() => setStep(2)}>
+                          Back
+                        </button>
+                        <button type="submit">Next</button>
+                      </div>
                     </div>
-                  </>
+                    <br></br>
+                    <div className="Pro-bar-3">
+                      <span className="Pro-bar-head">45%</span>
+                      <div className="Pro-bar-small-3"></div>
+                    </div>
+                  </div>
                 )}
 
                 {step === 4 && (
-                  <>
+                  <div className="Grand-parent">
+                    {"Step 4 of 5"}
                     <h2>Emergency Contacts</h2>
-
                     {values.emergencyContacts.map((_, index) => (
                       <div key={index} className="identity-card">
-                        {/* Contact Name */}
                         <label className="mini-head">Contact Name</label>
                         <Field
                           name={`emergencyContacts.${index}.name`}
@@ -447,7 +494,6 @@ const Onboard = () => {
                             </div>
                           )}
 
-                        {/* Relationship */}
                         <label className="mini-head">Relationship</label>
                         <Field
                           name={`emergencyContacts.${index}.relationship`}
@@ -460,7 +506,6 @@ const Onboard = () => {
                             </div>
                           )}
 
-                        {/* Phone */}
                         <label className="mini-head">Phone Number</label>
                         <Field
                           name={`emergencyContacts.${index}.phone`}
@@ -472,8 +517,7 @@ const Onboard = () => {
                               {errors.emergencyContacts[index].phone}
                             </div>
                           )}
-
-                        {/* Remove */}
+                        <br></br>
                         {values.emergencyContacts.length > 1 && (
                           <button
                             type="button"
@@ -490,8 +534,7 @@ const Onboard = () => {
                         )}
                       </div>
                     ))}
-
-                    {/* Add (max 3) */}
+                    <br></br>
                     {values.emergencyContacts.length < 3 && (
                       <button
                         type="button"
@@ -506,14 +549,146 @@ const Onboard = () => {
                         Add Emergency Contact
                       </button>
                     )}
-
+                    <br></br>
                     <div className="step-actions">
                       <button type="button" onClick={() => setStep(3)}>
                         Back
                       </button>
                       <button type="submit">Review</button>
                     </div>
-                  </>
+                    <br></br>
+                    <div className="Pro-bar-4">
+                      <span className="Pro-bar-head">75%</span>
+                      <div className="Pro-bar-small-4"></div>
+                    </div>
+                  </div>
+                )}
+
+                {step === 5 && (
+                  <div className="form-step">
+                    {"Step 5 of 5"}
+                    <h2>Review & Submit</h2>
+
+                    <div className="review-section">
+                      <div className="review-header">
+                        <h3 className="fivth-form">Personal Details</h3>
+                        <button
+                          type="button"
+                          onClick={() => setStep(1)}
+                          className="final-btn"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      <p>
+                        <strong>Name:</strong> {values.fullName}
+                      </p>
+                      <p>
+                        <strong>Email:</strong> {values.email}
+                      </p>
+                      <p>
+                        <strong>Phone:</strong> {values.phone}
+                      </p>
+                      <p>
+                        <strong>Gender:</strong> {values.gender}
+                      </p>
+                      <p>
+                        <strong>Marital Status:</strong> {values.maritalStatus}
+                      </p>
+                      {values.spouseName && (
+                        <p>
+                          <strong>Spouse Name:</strong> {values.spouseName}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="review-section">
+                      <div className="review-header">
+                        <h3 className="fivth-form">Bank & Identity</h3>
+                        <button
+                          type="button"
+                          onClick={() => setStep(3)}
+                          className="final-btn"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      <p>
+                        <strong>Bank Name:</strong> {values.Bank_name}
+                      </p>
+                      <p>
+                        <strong>IFSC Code:</strong> {values.IFSC_code}
+                      </p>
+
+                      {values.identityProofs.map((proof, index) => (
+                        <div key={index} className="review-subsection">
+                          <p>
+                            <strong>Account Number:</strong>{" "}
+                            {proof.accountNumber}
+                          </p>
+                          <p>
+                            <strong>Identity Type:</strong> {proof.identityType}
+                          </p>
+                          <p>
+                            <strong>Identity Number:</strong>{" "}
+                            {proof.identityNumber}
+                          </p>
+                          <p>
+                            <strong>File:</strong>{" "}
+                            {proof.file ? proof.file.name : "Not uploaded"}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="review-section">
+                      <div className="review-header">
+                        <h3 className="fivth-form">Emergency Contacts</h3>
+                        <button
+                          type="button"
+                          onClick={() => setStep(4)}
+                          className="final-btn"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      {values.emergencyContacts.map((contact, index) => (
+                        <div key={index} className="review-subsection">
+                          <p>
+                            <strong>Name:</strong> {contact.name}
+                          </p>
+                          <p>
+                            <strong>Relationship:</strong>{" "}
+                            {contact.relationship}
+                          </p>
+                          <p>
+                            <strong>Phone:</strong> {contact.phone}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <br></br>
+                    <div className="form-actions">
+                      <button type="button" onClick={() => setStep(3)}>
+                        Back
+                      </button>
+                      <br></br>
+                      <button
+                        type="button"
+                        onClick={() => handleclick(resetForm)}
+                        style={{ backgroundColor: "red" }}
+                      >
+                        RESET FORM
+                      </button>
+                      <br></br>
+                      <button type="submit">Confirm & Submit</button>
+                    </div>
+                    <br></br>
+                    <div className="Pro-bar-5">
+                      <span className="Pro-bar-head">100%</span>
+                      <div className="Pro-bar-small-5"></div>
+                    </div>
+                  </div>
                 )}
               </Form>
             )}

@@ -28,7 +28,6 @@ const appRouter = createBrowserRouter([
       },
 
       {
-        element: <Protected />,
         children: [
           {
             path: "/Body",
@@ -40,7 +39,7 @@ const appRouter = createBrowserRouter([
           },
           {
             path: "/OnBoard",
-            element: <Onboard/>,
+            element: <Onboard />,
           },
         ],
       },

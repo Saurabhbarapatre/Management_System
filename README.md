@@ -1,3 +1,5 @@
+Navigate-  Frontend--->Components----->Onboard.js   on this file Assignment code is present.
+
 Employee Management System with Onboarding Feature
 
 This project is a full-stack Employee Management System where office admins can perform CRUD operations, track employee attendance, and view analytics.

@@ -823,7 +823,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react-dom/client":"hrvwu","./components/Body":"hjG3v","./components/Sign_up":"ivbA5","react-router-dom":"61z4w","./components/Pok":"2WfoL","./components/Dashboard":"afPWz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./components/Protected":"bhKCF","./components/Onboard":"Rqr1k"}],"dVPUn":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react-dom/client":"hrvwu","./components/Body":"hjG3v","./components/Sign_up":"ivbA5","react-router-dom":"61z4w","./components/Pok":"2WfoL","./components/Dashboard":"afPWz","./components/Protected":"bhKCF","./components/Onboard":"Rqr1k","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -28458,26 +28458,13 @@ const Onboard = ()=>{
                     validationSchema: getValidationSchema(),
                     validateOnChange: true,
                     validateOnBlur: true,
-                    onSubmit: async (values, { setTouched, resetForm })=>{
+                    onSubmit: (values, { setTouched, resetForm })=>{
                         localStorage.setItem("onboard-form", JSON.stringify(values));
                         setTouched({});
                         if (step < 5) {
                             setStep(step + 1);
                             return;
                         }
-                        let obj = {};
-                        obj.name = values.fullName;
-                        obj.age = values.dob;
-                        obj.city = values.Department;
-                        const token = localStorage.getItem("token");
-                        await fetch("http://localhost:3000/Incoming", {
-                            method: "POST",
-                            headers: {
-                                "Content-type": "application/json",
-                                Authorization: `Bearer ${token}`
-                            },
-                            body: JSON.stringify(obj)
-                        });
                         resetForm();
                         localStorage.removeItem("onboard-form");
                         setStep(1);
@@ -28488,7 +28475,7 @@ const Onboard = ()=>{
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(ScrollToFirstError, {}, void 0, false, {
                                     fileName: "components/Onboard.js",
-                                    lineNumber: 202,
+                                    lineNumber: 186,
                                     columnNumber: 17
                                 }, undefined),
                                 step === 1 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28499,7 +28486,7 @@ const Onboard = ()=>{
                                             children: "Personal Details"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 206,
+                                            lineNumber: 190,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28507,7 +28494,7 @@ const Onboard = ()=>{
                                             children: "Full Name"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 207,
+                                            lineNumber: 191,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28515,7 +28502,7 @@ const Onboard = ()=>{
                                             className: "field"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 208,
+                                            lineNumber: 192,
                                             columnNumber: 21
                                         }, undefined),
                                         touched.fullName && errors.fullName && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28523,7 +28510,7 @@ const Onboard = ()=>{
                                             children: errors.fullName
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 210,
+                                            lineNumber: 194,
                                             columnNumber: 23
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28531,7 +28518,7 @@ const Onboard = ()=>{
                                             children: "Email"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 213,
+                                            lineNumber: 197,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28539,7 +28526,7 @@ const Onboard = ()=>{
                                             className: "field"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 214,
+                                            lineNumber: 198,
                                             columnNumber: 21
                                         }, undefined),
                                         touched.email && errors.email && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28547,7 +28534,7 @@ const Onboard = ()=>{
                                             children: errors.email
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 216,
+                                            lineNumber: 200,
                                             columnNumber: 23
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28555,7 +28542,7 @@ const Onboard = ()=>{
                                             children: "Phone Number"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 219,
+                                            lineNumber: 203,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28563,7 +28550,7 @@ const Onboard = ()=>{
                                             className: "field"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 220,
+                                            lineNumber: 204,
                                             columnNumber: 21
                                         }, undefined),
                                         touched.phone && errors.phone && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28571,7 +28558,7 @@ const Onboard = ()=>{
                                             children: errors.phone
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 222,
+                                            lineNumber: 206,
                                             columnNumber: 23
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28579,7 +28566,7 @@ const Onboard = ()=>{
                                             children: "Date of Birth"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 225,
+                                            lineNumber: 209,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28588,7 +28575,7 @@ const Onboard = ()=>{
                                             className: "field"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 226,
+                                            lineNumber: 210,
                                             columnNumber: 21
                                         }, undefined),
                                         touched.dob && errors.dob && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28596,7 +28583,7 @@ const Onboard = ()=>{
                                             children: errors.dob
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 228,
+                                            lineNumber: 212,
                                             columnNumber: 23
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28604,7 +28591,7 @@ const Onboard = ()=>{
                                             children: "Gender"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 231,
+                                            lineNumber: 215,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28615,14 +28602,14 @@ const Onboard = ()=>{
                                                     value: "Male"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 233,
+                                                    lineNumber: 217,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 " Male"
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 232,
+                                            lineNumber: 216,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28633,14 +28620,14 @@ const Onboard = ()=>{
                                                     value: "Female"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 236,
+                                                    lineNumber: 220,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 " Female"
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 235,
+                                            lineNumber: 219,
                                             columnNumber: 21
                                         }, undefined),
                                         touched.gender && errors.gender && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28648,7 +28635,7 @@ const Onboard = ()=>{
                                             children: errors.gender
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 239,
+                                            lineNumber: 223,
                                             columnNumber: 23
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28656,7 +28643,7 @@ const Onboard = ()=>{
                                             children: "Marital Status"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 242,
+                                            lineNumber: 226,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28669,7 +28656,7 @@ const Onboard = ()=>{
                                                     children: "Select"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 244,
+                                                    lineNumber: 228,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28677,7 +28664,7 @@ const Onboard = ()=>{
                                                     children: "Single"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 245,
+                                                    lineNumber: 229,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28685,13 +28672,13 @@ const Onboard = ()=>{
                                                     children: "Married"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 246,
+                                                    lineNumber: 230,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 243,
+                                            lineNumber: 227,
                                             columnNumber: 21
                                         }, undefined),
                                         touched.maritalStatus && errors.maritalStatus && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28699,7 +28686,7 @@ const Onboard = ()=>{
                                             children: errors.maritalStatus
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 249,
+                                            lineNumber: 233,
                                             columnNumber: 23
                                         }, undefined),
                                         values.maritalStatus === "Married" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
@@ -28709,7 +28696,7 @@ const Onboard = ()=>{
                                                     children: "Spouse Name"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 254,
+                                                    lineNumber: 238,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28717,7 +28704,7 @@ const Onboard = ()=>{
                                                     className: "field"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 255,
+                                                    lineNumber: 239,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 touched.spouseName && errors.spouseName && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28725,14 +28712,14 @@ const Onboard = ()=>{
                                                     children: errors.spouseName
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 257,
+                                                    lineNumber: 241,
                                                     columnNumber: 27
                                                 }, undefined)
                                             ]
                                         }, void 0, true),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 261,
+                                            lineNumber: 245,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28740,7 +28727,7 @@ const Onboard = ()=>{
                                             children: "Next"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 262,
+                                            lineNumber: 246,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28751,26 +28738,26 @@ const Onboard = ()=>{
                                                     children: "0%"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 264,
+                                                    lineNumber: 248,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                     className: "Pro-bar-small"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 265,
+                                                    lineNumber: 249,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 263,
+                                            lineNumber: 247,
                                             columnNumber: 21
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/Onboard.js",
-                                    lineNumber: 204,
+                                    lineNumber: 188,
                                     columnNumber: 19
                                 }, undefined),
                                 step === 2 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28781,7 +28768,7 @@ const Onboard = ()=>{
                                             children: "Employment Details"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 273,
+                                            lineNumber: 257,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28789,7 +28776,7 @@ const Onboard = ()=>{
                                             children: "Employee ID"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 275,
+                                            lineNumber: 259,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28799,7 +28786,7 @@ const Onboard = ()=>{
                                             placeholder: "Id will be generated By Backend"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 276,
+                                            lineNumber: 260,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28807,7 +28794,7 @@ const Onboard = ()=>{
                                             children: "Department"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 283,
+                                            lineNumber: 267,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28820,7 +28807,7 @@ const Onboard = ()=>{
                                                     children: "Select"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 285,
+                                                    lineNumber: 269,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28828,7 +28815,7 @@ const Onboard = ()=>{
                                                     children: "HR"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 286,
+                                                    lineNumber: 270,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28836,7 +28823,7 @@ const Onboard = ()=>{
                                                     children: "Engineering"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 287,
+                                                    lineNumber: 271,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28844,13 +28831,13 @@ const Onboard = ()=>{
                                                     children: "Sales"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 288,
+                                                    lineNumber: 272,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 284,
+                                            lineNumber: 268,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28858,7 +28845,7 @@ const Onboard = ()=>{
                                             children: "Role"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 291,
+                                            lineNumber: 275,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28871,7 +28858,7 @@ const Onboard = ()=>{
                                                     children: "Select"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 293,
+                                                    lineNumber: 277,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 values.Department === "HR" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28879,7 +28866,7 @@ const Onboard = ()=>{
                                                     children: "Recruiter"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 295,
+                                                    lineNumber: 279,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 values.Department === "Engineering" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28887,7 +28874,7 @@ const Onboard = ()=>{
                                                     children: "Developer"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 298,
+                                                    lineNumber: 282,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 values.Department === "Sales" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28895,13 +28882,13 @@ const Onboard = ()=>{
                                                     children: "Sales Executive"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 301,
+                                                    lineNumber: 285,
                                                     columnNumber: 25
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 292,
+                                            lineNumber: 276,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28909,7 +28896,7 @@ const Onboard = ()=>{
                                             children: "Employment Type"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 305,
+                                            lineNumber: 289,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28922,7 +28909,7 @@ const Onboard = ()=>{
                                                     children: "Select"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 307,
+                                                    lineNumber: 291,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28930,7 +28917,7 @@ const Onboard = ()=>{
                                                     children: "Full-Time"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 308,
+                                                    lineNumber: 292,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28938,13 +28925,13 @@ const Onboard = ()=>{
                                                     children: "Contract"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 309,
+                                                    lineNumber: 293,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 306,
+                                            lineNumber: 290,
                                             columnNumber: 21
                                         }, undefined),
                                         values.Employment_Type === "Contract" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
@@ -28954,7 +28941,7 @@ const Onboard = ()=>{
                                                     children: "Contract Start Date"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 314,
+                                                    lineNumber: 298,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28963,7 +28950,7 @@ const Onboard = ()=>{
                                                     className: "field"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 315,
+                                                    lineNumber: 299,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28971,7 +28958,7 @@ const Onboard = ()=>{
                                                     children: "Contract End Date"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 320,
+                                                    lineNumber: 304,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -28980,14 +28967,14 @@ const Onboard = ()=>{
                                                     className: "field"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 321,
+                                                    lineNumber: 305,
                                                     columnNumber: 25
                                                 }, undefined)
                                             ]
                                         }, void 0, true),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 328,
+                                            lineNumber: 312,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28996,12 +28983,12 @@ const Onboard = ()=>{
                                             children: "Back"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 329,
+                                            lineNumber: 313,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 332,
+                                            lineNumber: 316,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29009,12 +28996,12 @@ const Onboard = ()=>{
                                             children: "Next"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 333,
+                                            lineNumber: 317,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 334,
+                                            lineNumber: 318,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29025,26 +29012,26 @@ const Onboard = ()=>{
                                                     children: "20%"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 336,
+                                                    lineNumber: 320,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                     className: "Pro-bar-small-2"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 337,
+                                                    lineNumber: 321,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 335,
+                                            lineNumber: 319,
                                             columnNumber: 21
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/Onboard.js",
-                                    lineNumber: 271,
+                                    lineNumber: 255,
                                     columnNumber: 19
                                 }, undefined),
                                 step === 3 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29057,7 +29044,7 @@ const Onboard = ()=>{
                                                     children: "Bank & Identity Details"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 346,
+                                                    lineNumber: 330,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29065,7 +29052,7 @@ const Onboard = ()=>{
                                                     children: "Bank Name"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 348,
+                                                    lineNumber: 332,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29073,7 +29060,7 @@ const Onboard = ()=>{
                                                     className: "field"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 349,
+                                                    lineNumber: 333,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 touched.Bank_name && errors.Bank_name && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29081,7 +29068,7 @@ const Onboard = ()=>{
                                                     children: errors.Bank_name
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 351,
+                                                    lineNumber: 335,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29089,7 +29076,7 @@ const Onboard = ()=>{
                                                     children: "IFSC Code"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 354,
+                                                    lineNumber: 338,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29097,7 +29084,7 @@ const Onboard = ()=>{
                                                     className: "field"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 355,
+                                                    lineNumber: 339,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 touched.IFSC_code && errors.IFSC_code && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29105,14 +29092,14 @@ const Onboard = ()=>{
                                                     children: errors.IFSC_code
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 357,
+                                                    lineNumber: 341,
                                                     columnNumber: 25
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                                                     children: "Identity Proofs"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 360,
+                                                    lineNumber: 344,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 values.identityProofs.map((_, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29123,7 +29110,7 @@ const Onboard = ()=>{
                                                                 children: "Account Number"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 363,
+                                                                lineNumber: 347,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29131,7 +29118,7 @@ const Onboard = ()=>{
                                                                 className: "field"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 364,
+                                                                lineNumber: 348,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             touched.identityProofs?.[index]?.accountNumber && errors.identityProofs?.[index]?.accountNumber && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29139,7 +29126,7 @@ const Onboard = ()=>{
                                                                 children: errors.identityProofs[index].accountNumber
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 370,
+                                                                lineNumber: 354,
                                                                 columnNumber: 31
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29147,7 +29134,7 @@ const Onboard = ()=>{
                                                                 children: "Identity Type"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 375,
+                                                                lineNumber: 359,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29160,7 +29147,7 @@ const Onboard = ()=>{
                                                                         children: "Select"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 381,
+                                                                        lineNumber: 365,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -29168,7 +29155,7 @@ const Onboard = ()=>{
                                                                         children: "Aadhaar"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 382,
+                                                                        lineNumber: 366,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -29176,7 +29163,7 @@ const Onboard = ()=>{
                                                                         children: "Passport"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 383,
+                                                                        lineNumber: 367,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -29184,13 +29171,13 @@ const Onboard = ()=>{
                                                                         children: "PAN"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 384,
+                                                                        lineNumber: 368,
                                                                         columnNumber: 29
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 376,
+                                                                lineNumber: 360,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             touched.identityProofs?.[index]?.identityType && errors.identityProofs?.[index]?.identityType && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29198,7 +29185,7 @@ const Onboard = ()=>{
                                                                 children: errors.identityProofs[index].identityType
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 388,
+                                                                lineNumber: 372,
                                                                 columnNumber: 31
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29206,7 +29193,7 @@ const Onboard = ()=>{
                                                                 children: "Identity Number"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 393,
+                                                                lineNumber: 377,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29214,7 +29201,7 @@ const Onboard = ()=>{
                                                                 className: "field"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 394,
+                                                                lineNumber: 378,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             touched.identityProofs?.[index]?.identityNumber && errors.identityProofs?.[index]?.identityNumber && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29222,7 +29209,7 @@ const Onboard = ()=>{
                                                                 children: errors.identityProofs[index].identityNumber
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 400,
+                                                                lineNumber: 384,
                                                                 columnNumber: 31
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29230,7 +29217,7 @@ const Onboard = ()=>{
                                                                 children: "Upload File"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 405,
+                                                                lineNumber: 389,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -29240,7 +29227,7 @@ const Onboard = ()=>{
                                                                 onBlur: ()=>setFieldValue(`identityProofs.${index}.file`, values.identityProofs[index].file, true)
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 406,
+                                                                lineNumber: 390,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             touched.identityProofs?.[index]?.file && errors.identityProofs?.[index]?.file && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29248,12 +29235,12 @@ const Onboard = ()=>{
                                                                 children: errors.identityProofs[index].file
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 426,
+                                                                lineNumber: 410,
                                                                 columnNumber: 31
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 430,
+                                                                lineNumber: 414,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29266,18 +29253,18 @@ const Onboard = ()=>{
                                                                 children: "Remove"
                                                             }, void 0, false, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 431,
+                                                                lineNumber: 415,
                                                                 columnNumber: 27
                                                             }, undefined)
                                                         ]
                                                     }, index, true, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 362,
+                                                        lineNumber: 346,
                                                         columnNumber: 25
                                                     }, undefined)),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 445,
+                                                    lineNumber: 429,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29295,12 +29282,12 @@ const Onboard = ()=>{
                                                     children: "Add Identity Proof"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 446,
+                                                    lineNumber: 430,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 463,
+                                                    lineNumber: 447,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29312,7 +29299,7 @@ const Onboard = ()=>{
                                                             children: "Back"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 465,
+                                                            lineNumber: 449,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29320,24 +29307,24 @@ const Onboard = ()=>{
                                                             children: "Next"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 468,
+                                                            lineNumber: 452,
                                                             columnNumber: 25
                                                         }, undefined)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 464,
+                                                    lineNumber: 448,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, `step3`, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 345,
+                                            lineNumber: 329,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 471,
+                                            lineNumber: 455,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29348,26 +29335,26 @@ const Onboard = ()=>{
                                                     children: "45%"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 473,
+                                                    lineNumber: 457,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                     className: "Pro-bar-small-3"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 474,
+                                                    lineNumber: 458,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 472,
+                                            lineNumber: 456,
                                             columnNumber: 21
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/Onboard.js",
-                                    lineNumber: 343,
+                                    lineNumber: 327,
                                     columnNumber: 19
                                 }, undefined),
                                 step === 4 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29378,7 +29365,7 @@ const Onboard = ()=>{
                                             children: "Emergency Contacts"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 482,
+                                            lineNumber: 466,
                                             columnNumber: 21
                                         }, undefined),
                                         values.emergencyContacts.map((_, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29389,7 +29376,7 @@ const Onboard = ()=>{
                                                         children: "Contact Name"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 485,
+                                                        lineNumber: 469,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29397,7 +29384,7 @@ const Onboard = ()=>{
                                                         className: "field"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 486,
+                                                        lineNumber: 470,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     touched.emergencyContacts?.[index]?.name && errors.emergencyContacts?.[index]?.name && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29405,7 +29392,7 @@ const Onboard = ()=>{
                                                         children: errors.emergencyContacts[index].name
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 492,
+                                                        lineNumber: 476,
                                                         columnNumber: 29
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29413,7 +29400,7 @@ const Onboard = ()=>{
                                                         children: "Relationship"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 497,
+                                                        lineNumber: 481,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29421,7 +29408,7 @@ const Onboard = ()=>{
                                                         className: "field"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 498,
+                                                        lineNumber: 482,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     touched.emergencyContacts?.[index]?.relationship && errors.emergencyContacts?.[index]?.relationship && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29429,7 +29416,7 @@ const Onboard = ()=>{
                                                         children: errors.emergencyContacts[index].relationship
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 504,
+                                                        lineNumber: 488,
                                                         columnNumber: 29
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -29437,7 +29424,7 @@ const Onboard = ()=>{
                                                         children: "Phone Number"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 509,
+                                                        lineNumber: 493,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formik.Field), {
@@ -29445,7 +29432,7 @@ const Onboard = ()=>{
                                                         className: "field"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 510,
+                                                        lineNumber: 494,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     touched.emergencyContacts?.[index]?.phone && errors.emergencyContacts?.[index]?.phone && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29453,12 +29440,12 @@ const Onboard = ()=>{
                                                         children: errors.emergencyContacts[index].phone
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 516,
+                                                        lineNumber: 500,
                                                         columnNumber: 29
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 520,
+                                                        lineNumber: 504,
                                                         columnNumber: 25
                                                     }, undefined),
                                                     values.emergencyContacts.length > 1 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29471,18 +29458,18 @@ const Onboard = ()=>{
                                                         children: "Remove"
                                                     }, void 0, false, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 522,
+                                                        lineNumber: 506,
                                                         columnNumber: 27
                                                     }, undefined)
                                                 ]
                                             }, index, true, {
                                                 fileName: "components/Onboard.js",
-                                                lineNumber: 484,
+                                                lineNumber: 468,
                                                 columnNumber: 23
                                             }, undefined)),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 537,
+                                            lineNumber: 521,
                                             columnNumber: 21
                                         }, undefined),
                                         values.emergencyContacts.length < 3 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29499,12 +29486,12 @@ const Onboard = ()=>{
                                             children: "Add Emergency Contact"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 539,
+                                            lineNumber: 523,
                                             columnNumber: 23
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 552,
+                                            lineNumber: 536,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29516,7 +29503,7 @@ const Onboard = ()=>{
                                                     children: "Back"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 554,
+                                                    lineNumber: 538,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29524,18 +29511,18 @@ const Onboard = ()=>{
                                                     children: "Review"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 557,
+                                                    lineNumber: 541,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 553,
+                                            lineNumber: 537,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 559,
+                                            lineNumber: 543,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29546,26 +29533,26 @@ const Onboard = ()=>{
                                                     children: "75%"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 561,
+                                                    lineNumber: 545,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                     className: "Pro-bar-small-4"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 562,
+                                                    lineNumber: 546,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 560,
+                                            lineNumber: 544,
                                             columnNumber: 21
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/Onboard.js",
-                                    lineNumber: 480,
+                                    lineNumber: 464,
                                     columnNumber: 19
                                 }, undefined),
                                 step === 5 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29576,7 +29563,7 @@ const Onboard = ()=>{
                                             children: "Review & Submit"
                                         }, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 570,
+                                            lineNumber: 554,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29590,7 +29577,7 @@ const Onboard = ()=>{
                                                             children: "Personal Details"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 574,
+                                                            lineNumber: 558,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29600,9 +29587,60 @@ const Onboard = ()=>{
                                                             children: "Edit"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 575,
+                                                            lineNumber: 559,
                                                             columnNumber: 25
                                                         }, undefined)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "components/Onboard.js",
+                                                    lineNumber: 557,
+                                                    columnNumber: 23
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                                            children: "Name:"
+                                                        }, void 0, false, {
+                                                            fileName: "components/Onboard.js",
+                                                            lineNumber: 568,
+                                                            columnNumber: 25
+                                                        }, undefined),
+                                                        " ",
+                                                        values.fullName
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "components/Onboard.js",
+                                                    lineNumber: 567,
+                                                    columnNumber: 23
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                                            children: "Email:"
+                                                        }, void 0, false, {
+                                                            fileName: "components/Onboard.js",
+                                                            lineNumber: 571,
+                                                            columnNumber: 25
+                                                        }, undefined),
+                                                        " ",
+                                                        values.email
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "components/Onboard.js",
+                                                    lineNumber: 570,
+                                                    columnNumber: 23
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                                            children: "Phone:"
+                                                        }, void 0, false, {
+                                                            fileName: "components/Onboard.js",
+                                                            lineNumber: 574,
+                                                            columnNumber: 25
+                                                        }, undefined),
+                                                        " ",
+                                                        values.phone
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
@@ -29612,61 +29650,10 @@ const Onboard = ()=>{
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     children: [
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
-                                                            children: "Name:"
-                                                        }, void 0, false, {
-                                                            fileName: "components/Onboard.js",
-                                                            lineNumber: 584,
-                                                            columnNumber: 25
-                                                        }, undefined),
-                                                        " ",
-                                                        values.fullName
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "components/Onboard.js",
-                                                    lineNumber: 583,
-                                                    columnNumber: 23
-                                                }, undefined),
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                                    children: [
-                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
-                                                            children: "Email:"
-                                                        }, void 0, false, {
-                                                            fileName: "components/Onboard.js",
-                                                            lineNumber: 587,
-                                                            columnNumber: 25
-                                                        }, undefined),
-                                                        " ",
-                                                        values.email
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "components/Onboard.js",
-                                                    lineNumber: 586,
-                                                    columnNumber: 23
-                                                }, undefined),
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                                    children: [
-                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
-                                                            children: "Phone:"
-                                                        }, void 0, false, {
-                                                            fileName: "components/Onboard.js",
-                                                            lineNumber: 590,
-                                                            columnNumber: 25
-                                                        }, undefined),
-                                                        " ",
-                                                        values.phone
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "components/Onboard.js",
-                                                    lineNumber: 589,
-                                                    columnNumber: 23
-                                                }, undefined),
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                                    children: [
-                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
                                                             children: "Gender:"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 593,
+                                                            lineNumber: 577,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         " ",
@@ -29674,7 +29661,7 @@ const Onboard = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 592,
+                                                    lineNumber: 576,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29683,7 +29670,7 @@ const Onboard = ()=>{
                                                             children: "Marital Status:"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 596,
+                                                            lineNumber: 580,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         " ",
@@ -29691,7 +29678,7 @@ const Onboard = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 595,
+                                                    lineNumber: 579,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 values.spouseName && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29700,7 +29687,7 @@ const Onboard = ()=>{
                                                             children: "Spouse Name:"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 600,
+                                                            lineNumber: 584,
                                                             columnNumber: 27
                                                         }, undefined),
                                                         " ",
@@ -29708,13 +29695,13 @@ const Onboard = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 599,
+                                                    lineNumber: 583,
                                                     columnNumber: 25
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 572,
+                                            lineNumber: 556,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29728,7 +29715,7 @@ const Onboard = ()=>{
                                                             children: "Bank & Identity"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 607,
+                                                            lineNumber: 591,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29738,13 +29725,13 @@ const Onboard = ()=>{
                                                             children: "Edit"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 608,
+                                                            lineNumber: 592,
                                                             columnNumber: 25
                                                         }, undefined)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 606,
+                                                    lineNumber: 590,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29753,7 +29740,7 @@ const Onboard = ()=>{
                                                             children: "Bank Name:"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 617,
+                                                            lineNumber: 601,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         " ",
@@ -29761,7 +29748,7 @@ const Onboard = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 616,
+                                                    lineNumber: 600,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29770,7 +29757,7 @@ const Onboard = ()=>{
                                                             children: "IFSC Code:"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 620,
+                                                            lineNumber: 604,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         " ",
@@ -29778,7 +29765,7 @@ const Onboard = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 619,
+                                                    lineNumber: 603,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 values.identityProofs.map((proof, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29790,7 +29777,7 @@ const Onboard = ()=>{
                                                                         children: "Account Number:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 626,
+                                                                        lineNumber: 610,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29798,7 +29785,7 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 625,
+                                                                lineNumber: 609,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29807,7 +29794,7 @@ const Onboard = ()=>{
                                                                         children: "Identity Type:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 630,
+                                                                        lineNumber: 614,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29815,7 +29802,7 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 629,
+                                                                lineNumber: 613,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29824,7 +29811,7 @@ const Onboard = ()=>{
                                                                         children: "Identity Number:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 633,
+                                                                        lineNumber: 617,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29832,7 +29819,7 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 632,
+                                                                lineNumber: 616,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29841,7 +29828,7 @@ const Onboard = ()=>{
                                                                         children: "File:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 637,
+                                                                        lineNumber: 621,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29849,19 +29836,19 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 636,
+                                                                lineNumber: 620,
                                                                 columnNumber: 27
                                                             }, undefined)
                                                         ]
                                                     }, index, true, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 624,
+                                                        lineNumber: 608,
                                                         columnNumber: 25
                                                     }, undefined))
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 605,
+                                            lineNumber: 589,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29875,7 +29862,7 @@ const Onboard = ()=>{
                                                             children: "Emergency Contacts"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 646,
+                                                            lineNumber: 630,
                                                             columnNumber: 25
                                                         }, undefined),
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29885,13 +29872,13 @@ const Onboard = ()=>{
                                                             children: "Edit"
                                                         }, void 0, false, {
                                                             fileName: "components/Onboard.js",
-                                                            lineNumber: 647,
+                                                            lineNumber: 631,
                                                             columnNumber: 25
                                                         }, undefined)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 645,
+                                                    lineNumber: 629,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 values.emergencyContacts.map((contact, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29903,7 +29890,7 @@ const Onboard = ()=>{
                                                                         children: "Name:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 658,
+                                                                        lineNumber: 642,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29911,7 +29898,7 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 657,
+                                                                lineNumber: 641,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29920,7 +29907,7 @@ const Onboard = ()=>{
                                                                         children: "Relationship:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 661,
+                                                                        lineNumber: 645,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29928,7 +29915,7 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 660,
+                                                                lineNumber: 644,
                                                                 columnNumber: 27
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29937,7 +29924,7 @@ const Onboard = ()=>{
                                                                         children: "Phone:"
                                                                     }, void 0, false, {
                                                                         fileName: "components/Onboard.js",
-                                                                        lineNumber: 665,
+                                                                        lineNumber: 649,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     " ",
@@ -29945,24 +29932,24 @@ const Onboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "components/Onboard.js",
-                                                                lineNumber: 664,
+                                                                lineNumber: 648,
                                                                 columnNumber: 27
                                                             }, undefined)
                                                         ]
                                                     }, index, true, {
                                                         fileName: "components/Onboard.js",
-                                                        lineNumber: 656,
+                                                        lineNumber: 640,
                                                         columnNumber: 25
                                                     }, undefined))
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 644,
+                                            lineNumber: 628,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 670,
+                                            lineNumber: 654,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29974,12 +29961,12 @@ const Onboard = ()=>{
                                                     children: "Back"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 672,
+                                                    lineNumber: 656,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 675,
+                                                    lineNumber: 659,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -29991,12 +29978,12 @@ const Onboard = ()=>{
                                                     children: "RESET FORM"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 676,
+                                                    lineNumber: 660,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 683,
+                                                    lineNumber: 667,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -30004,18 +29991,18 @@ const Onboard = ()=>{
                                                     children: "Confirm & Submit"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 684,
+                                                    lineNumber: 668,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 671,
+                                            lineNumber: 655,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 686,
+                                            lineNumber: 670,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -30026,32 +30013,32 @@ const Onboard = ()=>{
                                                     children: "100%"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 688,
+                                                    lineNumber: 672,
                                                     columnNumber: 23
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                     className: "Pro-bar-small-5"
                                                 }, void 0, false, {
                                                     fileName: "components/Onboard.js",
-                                                    lineNumber: 689,
+                                                    lineNumber: 673,
                                                     columnNumber: 23
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/Onboard.js",
-                                            lineNumber: 687,
+                                            lineNumber: 671,
                                             columnNumber: 21
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/Onboard.js",
-                                    lineNumber: 568,
+                                    lineNumber: 552,
                                     columnNumber: 19
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/Onboard.js",
-                            lineNumber: 201,
+                            lineNumber: 185,
                             columnNumber: 15
                         }, undefined)
                 }, void 0, false, {
@@ -30087,7 +30074,7 @@ $RefreshReg$(_c1, "Onboard");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","formik":"4aFtK","yup":"jUpak","react":"jMk1U"}],"4aFtK":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","formik":"4aFtK","yup":"jUpak","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"4aFtK":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ErrorMessage", ()=>ErrorMessage);

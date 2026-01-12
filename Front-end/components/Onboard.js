@@ -165,7 +165,7 @@ const Onboard = () => {
             validationSchema={getValidationSchema()}
             validateOnChange={true}
             validateOnBlur={true}
-            onSubmit={async (values, { setTouched, resetForm }) => {
+            onSubmit={(values, { setTouched, resetForm }) => {
               localStorage.setItem("onboard-form", JSON.stringify(values));
               setTouched({});
 
@@ -173,22 +173,6 @@ const Onboard = () => {
                 setStep(step + 1);
                 return;
               }
-
-              let obj = {};
-              obj.name = values.fullName;
-              obj.age = values.dob;
-              obj.city = values.Department;
-
-              const token = localStorage.getItem("token");
-
-              await fetch("http://localhost:3000/Incoming", {
-                method: "POST",
-                headers: {
-                  "Content-type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(obj),
-              });
 
               resetForm();
               localStorage.removeItem("onboard-form");
